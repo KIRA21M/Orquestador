@@ -47,7 +47,7 @@ ANTHROPIC_API_KEY=tu_clave_real
 ANTHROPIC_MODEL=claude-sonnet-4-5-20250929
 ```
 
-Para ejecución en GitHub Actions, crea un secreto del repositorio llamado `ANTHROPIC_API_KEY` en `Settings > Secrets and variables > Actions`. El workflow ejecutará las pruebas siempre y ejecutará la comparación generativa con Claude solo cuando ese secreto exista. El resultado se publica como artefacto de la ejecución y no se guarda en el repositorio.
+Para ejecución en GitHub Actions, este repositorio usa el secreto existente `API` en `Settings > Secrets and variables > Actions`. El workflow lo asigna internamente a `ANTHROPIC_API_KEY`, ejecuta la comparación generativa con Claude y publica el resultado como artefacto sin guardarlo en el repositorio.
 
 ## Endpoint
 
