@@ -28,6 +28,26 @@ npm start
 
 El modo `traditional` funciona sin credenciales. Para `generative`, configura `OPENAI_API_KEY` en `.env`; no se simulan respuestas generativas.
 
+## Configuración segura de la API key
+
+La clave nunca debe escribirse en el código, en `README.md` ni en un commit.
+
+Para ejecución local:
+
+```powershell
+Copy-Item .env.example .env
+notepad .env
+```
+
+Completa únicamente en tu máquina:
+
+```env
+OPENAI_API_KEY=tu_clave_real
+OPENAI_MODEL=gpt-4o-mini
+```
+
+Para ejecución en GitHub Actions, crea un secreto del repositorio llamado `OPENAI_API_KEY` en `Settings > Secrets and variables > Actions`. El workflow ejecutará las pruebas siempre y ejecutará la comparación generativa solo cuando ese secreto exista. El resultado se publica como artefacto de la ejecución y no se guarda en el repositorio.
+
 ## Endpoint
 
 `POST /api/analyze`
