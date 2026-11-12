@@ -31,8 +31,8 @@ export async function analyzeGenerative(message) {
       })
     });
     if (!response.ok) {
-      const detail = await response.text();
-      const error = new Error(`Proveedor generativo respondió ${response.status}: ${detail.slice(0, 300)}`);
+      await response.text();
+      const error = new Error(`El proveedor generativo respondió con estado ${response.status}.`);
       error.statusCode = 502;
       throw error;
     }
