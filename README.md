@@ -26,11 +26,11 @@ npm run compare
 npm start
 ```
 
-El modo `traditional` funciona sin credenciales. Para `generative`, configura `OPENAI_API_KEY` en `.env`; no se simulan respuestas generativas.
+El modo `traditional` funciona sin credenciales. Para `generative`, configura `ANTHROPIC_API_KEY` en `.env`; no se simulan respuestas generativas.
 
 ## Configuración segura de la API key
 
-La clave nunca debe escribirse en el código, en `README.md` ni en un commit.
+La clave nunca debe escribirse en el código, en `README.md` ni en un commit. El MVP usa Claude por defecto mediante la API de Anthropic.
 
 Para ejecución local:
 
@@ -42,11 +42,12 @@ notepad .env
 Completa únicamente en tu máquina:
 
 ```env
-OPENAI_API_KEY=tu_clave_real
-OPENAI_MODEL=gpt-4o-mini
+AI_PROVIDER=anthropic
+ANTHROPIC_API_KEY=tu_clave_real
+ANTHROPIC_MODEL=claude-sonnet-4-5-20250929
 ```
 
-Para ejecución en GitHub Actions, crea un secreto del repositorio llamado `OPENAI_API_KEY` en `Settings > Secrets and variables > Actions`. El workflow ejecutará las pruebas siempre y ejecutará la comparación generativa solo cuando ese secreto exista. El resultado se publica como artefacto de la ejecución y no se guarda en el repositorio.
+Para ejecución en GitHub Actions, crea un secreto del repositorio llamado `ANTHROPIC_API_KEY` en `Settings > Secrets and variables > Actions`. El workflow ejecutará las pruebas siempre y ejecutará la comparación generativa con Claude solo cuando ese secreto exista. El resultado se publica como artefacto de la ejecución y no se guarda en el repositorio.
 
 ## Endpoint
 
@@ -73,4 +74,4 @@ Las solicitudes de seguridad siempre se devuelven con `requiresHumanReview: true
 
 ## Primera evaluación MVP
 
-`npm run compare` ejecuta 10 casos de referencia contra el motor tradicional. Si `OPENAI_API_KEY` está configurada, ejecuta los mismos casos contra el motor generativo y calcula formato válido, exactitud de categoría y exactitud conjunta de categoría y prioridad. Sin credencial, el bloque generativo se marca como omitido sin simular resultados.
+`npm run compare` ejecuta 10 casos de referencia contra el motor tradicional. Si `ANTHROPIC_API_KEY` está configurada, ejecuta los mismos casos contra Claude y calcula formato válido, exactitud de categoría y exactitud conjunta de categoría y prioridad. Sin credencial, el bloque generativo se marca como omitido sin simular resultados.

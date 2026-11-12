@@ -1,7 +1,7 @@
 import { referenceCases } from './referenceCases.js';
 import { analyzeTraditional } from '../engines/traditionalEngine.js';
 import { analyzeGenerative } from '../engines/generativeEngine.js';
-import { config } from '../config.js';
+import { config, hasGenerativeApiKey } from '../config.js';
 import { isSupportAnalysis } from '../domain/support.js';
 
 function evaluate(result, expected) {
@@ -34,7 +34,7 @@ async function run() {
   }));
 
   const generative = [];
-  if (config.openAiApiKey) {
+  if (hasGenerativeApiKey()) {
     for (const expected of referenceCases) {
       try {
         const result = await analyzeGenerative(expected.message);
@@ -44,7 +44,8 @@ async function run() {
       }
     }
   } else {
-    generative.push(...referenceCases.map((expected) => ({ ...expected, status: 'skipped', error: 'OPENAI_API_KEY no configurada' })));
+    const variable = config.aiProvider === 'anthropic' ? 'ANTHROPIC_API_KEY' : 'OPENAI_API_KEY';
+    generative.push(...referenceCases.map((expected) => ({ ...expected, status: 'skipped', error: `${variable} no configurada` })));
   }
 
   console.log(JSON.stringify({
