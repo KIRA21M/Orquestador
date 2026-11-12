@@ -11,6 +11,7 @@ src/
   engines/                Motor traditional y motor generative
   http/                   Servidor HTTP y endpoint
 test/                     Pruebas unitarias mínimas
+src/evaluation/           Casos de referencia y comparación de motores
 ```
 
 ## Ejecución
@@ -21,6 +22,7 @@ Requiere Node.js 20 o superior.
 npm install
 Copy-Item .env.example .env
 npm test
+npm run compare
 npm start
 ```
 
@@ -48,3 +50,7 @@ Invoke-RestMethod -Method Post http://localhost:3000/api/analyze `
 ```
 
 Las solicitudes de seguridad siempre se devuelven con `requiresHumanReview: true`. El motor generativo usa salida JSON, valida el contrato y convierte errores del proveedor en respuestas HTTP controladas.
+
+## Primera evaluación MVP
+
+`npm run compare` ejecuta 10 casos de referencia contra el motor tradicional. Si `OPENAI_API_KEY` está configurada, ejecuta los mismos casos contra el motor generativo y calcula formato válido, exactitud de categoría y exactitud conjunta de categoría y prioridad. Sin credencial, el bloque generativo se marca como omitido sin simular resultados.
