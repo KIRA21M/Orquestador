@@ -1,3 +1,8 @@
+##Integrantes 
+Samuel Jonathan Trujillo Bolaños-3523110007
+Kevin Omar Sixto Lázaro-3523110482
+Armando Valerio Salmeron-3522110726
+Jesús Emanuel Vega Medina-3523110340
 # AI Support Engine
 
 Base funcional del reto: un endpoint común para analizar solicitudes mediante un motor tradicional por reglas o un motor generativo conectado a un proveedor real.
